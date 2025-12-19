@@ -15,49 +15,13 @@ public class Menu {
     }
 
     public void iniciar(){
-        // --- Drink 1: Whiskey Sour ---
-        ArrayList<String> ing1 = new ArrayList<>(Arrays.asList("Whiskey", "Suco de Limão", "Xarope de Açúcar", "Clara de Ovo"));
-
-        ArrayList<String> prep1 = new ArrayList<>();
-        prep1.add("Coloque todos os ingredientes na coqueteleira com gelo.");
-        prep1.add("Agite vigorosamente por 15 segundos.");
-        prep1.add("Coe para um copo baixo com gelo novo.");
-        prep1.add("Decore com uma casca de limão.");
-
-        Drinks d1 = new Drinks("Whiskey Sour", ing1, 4.8f,prep1, Categorias.SHOT, null);
-        listaDeDrinks.add(d1);
-
-
-        // --- Drink 2: Mojito ---
-        ArrayList<String> ing2 = new ArrayList<>(Arrays.asList("Rum Branco", "Hortelã", "Suco de Limão", "Água com Gás"));
-
-        ArrayList<String> prep2 = new ArrayList<>();
-        prep2.add("Macere a hortelã com o suco de limão no copo.");
-        prep2.add("Adicione o rum e encha de gelo.");
-        prep2.add("Complete com água com gás.");
-        prep2.add("Misture suavemente com uma colher bailarina.");
-
-        Drinks d2 = new Drinks("Mojito", ing2, 4.5f,prep2, Categorias.LONG_DRINK, null);
-        listaDeDrinks.add(d2);
-
-
-        // --- Drink 3: Suco Detox ---
-        ArrayList<String> ing3 = new ArrayList<>(Arrays.asList("Couve", "Limão", "Gengibre", "Água de Coco"));
-
-        ArrayList<String> prep3 = new ArrayList<>();
-        prep3.add("Lave bem as folhas de couve.");
-        prep3.add("Bata tudo no liquidificador até ficar homogêneo.");
-        prep3.add("Coe se preferir uma textura mais líquida.");
-        prep3.add("Sirva imediatamente sem adoçar.");
-
-        Drinks d3 = new Drinks("Suco Detox", ing3, 5.0f,prep3, Categorias.SEM_ALCOOL, null);
-        listaDeDrinks.add(d3);
+        carregarDadosIniciais();
 
         while(sistemaAtivo) {
             System.out.println("1.Adicionar drink:");
             System.out.println("2.Visualizar drink:");
             System.out.println("0.Sair:");
-            int opcao = Integer.parseInt(scanner.nextLine());
+            int opcao = (int) recebeNumero();
             switch (opcao) {
                 case 1:
                     cadastrarDrink();
@@ -120,6 +84,46 @@ public class Menu {
         }
         Drinks drink = new Drinks(nome, listaDeIngredientes, nota, modoPreparo, categoria, null);
         listaDeDrinks.add(drink);
+    }
+
+    private void carregarDadosIniciais(){
+        // --- Drink 1: Whiskey Sour ---
+        ArrayList<String> ing1 = new ArrayList<>(Arrays.asList("Whiskey", "Suco de Limão", "Xarope de Açúcar", "Clara de Ovo"));
+
+        ArrayList<String> prep1 = new ArrayList<>();
+        prep1.add("Coloque todos os ingredientes na coqueteleira com gelo.");
+        prep1.add("Agite vigorosamente por 15 segundos.");
+        prep1.add("Coe para um copo baixo com gelo novo.");
+        prep1.add("Decore com uma casca de limão.");
+
+        Drinks d1 = new Drinks("Whiskey Sour", ing1, 4.8f,prep1, Categorias.SHOT, null);
+        listaDeDrinks.add(d1);
+
+
+        // --- Drink 2: Mojito ---
+        ArrayList<String> ing2 = new ArrayList<>(Arrays.asList("Rum Branco", "Hortelã", "Suco de Limão", "Água com Gás"));
+
+        ArrayList<String> prep2 = new ArrayList<>();
+        prep2.add("Macere a hortelã com o suco de limão no copo.");
+        prep2.add("Adicione o rum e encha de gelo.");
+        prep2.add("Complete com água com gás.");
+        prep2.add("Misture suavemente com uma colher bailarina.");
+
+        Drinks d2 = new Drinks("Mojito", ing2, 4.5f,prep2, Categorias.LONG_DRINK, null);
+        listaDeDrinks.add(d2);
+
+
+        // --- Drink 3: Suco Detox ---
+        ArrayList<String> ing3 = new ArrayList<>(Arrays.asList("Couve", "Limão", "Gengibre", "Água de Coco"));
+
+        ArrayList<String> prep3 = new ArrayList<>();
+        prep3.add("Lave bem as folhas de couve.");
+        prep3.add("Bata tudo no liquidificador até ficar homogêneo.");
+        prep3.add("Coe se preferir uma textura mais líquida.");
+        prep3.add("Sirva imediatamente sem adoçar.");
+
+        Drinks d3 = new Drinks("Suco Detox", ing3, 5.0f,prep3, Categorias.SEM_ALCOOL, null);
+        listaDeDrinks.add(d3);
     }
 
     private void mostrarDrinks(){
