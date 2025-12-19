@@ -6,11 +6,17 @@ public class Drinks {
     private String nome;
     private ArrayList<String> ingredientes;
     private float nota;
+    private ArrayList<String> modoDePreparo;
+    private Categorias categoria;
+    private String urlImagem;
 
-    public Drinks(String nome, ArrayList<String> ingredientes, float nota) {
+    public Drinks(String nome, ArrayList<String> ingredientes, float nota, ArrayList<String> modoDePreparo, Categorias categoria, String urlImagem) {
         this.nome = nome;
         this.ingredientes = ingredientes;
         this.nota = nota;
+        this.modoDePreparo = modoDePreparo;
+        this.categoria = categoria;
+        this.urlImagem = urlImagem;
     }
 
     @Override
@@ -19,6 +25,7 @@ public class Drinks {
 
         // Adiciona o título do objeto principal
         sb.append("Nome: ").append(this.nome).append("\n");
+        sb.append("Categoria do drink: ").append(this.categoria).append("\n");
         sb.append("Lista de ingredientes:\n");
 
         // Percorre a lista interna e vai adicionando ao StringBuilder
@@ -27,6 +34,14 @@ public class Drinks {
         } else {
             for (String i : this.ingredientes) {
                 sb.append("  - ").append(i).append("\n");
+            }
+        }
+        sb.append("Modo de preparo:\n");
+        if (this.modoDePreparo.isEmpty()) {
+            sb.append("  (Vazio)");
+        } else {
+            for (int i=0;i<this.modoDePreparo.size();i++) {
+                sb.append("Passo ").append(i + 1).append(" - ").append(modoDePreparo.get(i)).append("\n");
             }
         }
         sb.append("Nota: ").append(this.nota).append("\n");
