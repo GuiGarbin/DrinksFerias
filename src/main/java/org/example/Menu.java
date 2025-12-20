@@ -7,9 +7,9 @@ import java.util.Scanner;
 
 public class Menu {
 
-    ArrayList<Drinks> listaDeDrinks = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
     boolean sistemaAtivo=true;
+    BancoDeDrinks banco = new BancoDeDrinks();
 
     public Menu(){
     }
@@ -83,7 +83,7 @@ public class Menu {
             nota=recebeNumero();
         }
         Drinks drink = new Drinks(nome, listaDeIngredientes, nota, modoPreparo, categoria, null);
-        listaDeDrinks.add(drink);
+        banco.adicionarDrink(drink);
     }
 
     private void carregarDadosIniciais(){
@@ -97,7 +97,7 @@ public class Menu {
         prep1.add("Decore com uma casca de limão.");
 
         Drinks d1 = new Drinks("Whiskey Sour", ing1, 4.8f,prep1, Categorias.SHOT, null);
-        listaDeDrinks.add(d1);
+        banco.adicionarDrink(d1);
 
 
         // --- Drink 2: Mojito ---
@@ -110,8 +110,7 @@ public class Menu {
         prep2.add("Misture suavemente com uma colher bailarina.");
 
         Drinks d2 = new Drinks("Mojito", ing2, 4.5f,prep2, Categorias.LONG_DRINK, null);
-        listaDeDrinks.add(d2);
-
+        banco.adicionarDrink(d2);
 
         // --- Drink 3: Suco Detox ---
         ArrayList<String> ing3 = new ArrayList<>(Arrays.asList("Couve", "Limão", "Gengibre", "Água de Coco"));
@@ -123,20 +122,21 @@ public class Menu {
         prep3.add("Sirva imediatamente sem adoçar.");
 
         Drinks d3 = new Drinks("Suco Detox", ing3, 5.0f,prep3, Categorias.SEM_ALCOOL, null);
-        listaDeDrinks.add(d3);
+        banco.adicionarDrink(d3);
     }
 
     private void mostrarDrinks(){
-        for (int i=0;i<listaDeDrinks.size();i++) {
-            System.out.println("Nome do drink " + (i+1) + " : " + listaDeDrinks.get(i).getNome());
+        ArrayList<Drinks> listaRecebida = banco.listarDrinks();
+        for (int i=0;i<listaRecebida.size();i++) {
+            System.out.println("Nome do drink " + (i+1) + " : " + listaRecebida.get(i).getNome());
         }
         System.out.println("Qual drink gostaria de ver os detalhes?");
-        int indiceDrink = scanner.nextInt();
-        scanner.nextLine();
-        if(indiceDrink>0&&indiceDrink<=listaDeDrinks.size()){
-            System.out.println(listaDeDrinks.get(indiceDrink-1));
+        int indiceDrink = (int) recebeNumero();
+        Drinks drinkEncontrado = banco.buscarPorIndice(indiceDrink-1);
+        if(drinkEncontrado!=null){
+            System.out.println(drinkEncontrado);
         } else {
-            System.out.println("Numero invalido\n");
+            System.out.println("Drink não encontrado\n");
         }
     }
 
